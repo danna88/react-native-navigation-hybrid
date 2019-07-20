@@ -1,8 +1,8 @@
 package com.navigationhybrid;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 
@@ -76,11 +76,11 @@ public class ReactTabBarFragment extends TabBarFragment {
         if (reactFragment != null && !reactFragment.isFirstRenderCompleted()) {
             List<AwesomeFragment> children = getChildFragments();
             if (children.indexOf(current) > children.indexOf(previous)) {
-                current.setAnimation(PresentAnimation.FadeShort);
-                previous.setAnimation(PresentAnimation.DelayShort);
+                current.setAnimation(PresentAnimation.Fade);
+                previous.setAnimation(PresentAnimation.Delay);
             } else {
                 current.setAnimation(PresentAnimation.None);
-                previous.setAnimation(PresentAnimation.FadeShort);
+                previous.setAnimation(PresentAnimation.Fade);
             }
             return;
         }

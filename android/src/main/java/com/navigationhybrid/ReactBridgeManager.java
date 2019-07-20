@@ -1,9 +1,10 @@
 package com.navigationhybrid;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.UiThread;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 import android.util.Log;
 
 import com.facebook.react.ReactInstanceManager;
@@ -342,24 +343,21 @@ public class ReactBridgeManager {
         if (options != null) {
             Bundle tabItem = options.getBundle("tabItem");
             if (tabItem != null) {
-                String title = tabItem.getString("title", "Tab");
-                TabBarItem tabBarItem = null;
+                String title = tabItem.getString("title");
+                String uri = null;
+                String selectedUri = null;
 
                 Bundle icon = tabItem.getBundle("icon");
                 if (icon != null) {
-                    String uri = icon.getString("uri");
-                    if (uri != null) {
-                        tabBarItem = new TabBarItem(uri, title);
-                        Bundle unselectedIcon = tabItem.getBundle("unselectedIcon");
-                        if (unselectedIcon != null) {
-                            String unselectedUri = unselectedIcon.getString("uri");
-                            if (unselectedUri != null) {
-                                tabBarItem = new TabBarItem(uri, unselectedUri, title);
-                            }
-                        }
-                    }
+                    uri = icon.getString("uri");
                 }
 
+                Bundle selectedIcon = tabItem.getBundle("selectedIcon");
+                if (selectedIcon != null) {
+                    selectedUri = selectedIcon.getString("uri");
+                }
+
+                TabBarItem tabBarItem = new TabBarItem(uri, selectedUri, title);
                 fragment.setTabBarItem(tabBarItem);
             }
         }

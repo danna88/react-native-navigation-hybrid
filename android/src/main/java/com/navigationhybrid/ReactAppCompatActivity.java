@@ -1,9 +1,10 @@
 package com.navigationhybrid;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
@@ -18,6 +19,8 @@ import com.facebook.react.modules.core.PermissionListener;
 
 import me.listenzz.navigation.AwesomeActivity;
 import me.listenzz.navigation.AwesomeFragment;
+import me.listenzz.navigation.FragmentHelper;
+import me.listenzz.navigation.PresentAnimation;
 import me.listenzz.navigation.Style;
 
 /**
@@ -104,6 +107,13 @@ public class ReactAppCompatActivity extends AwesomeActivity implements DefaultHa
         if (getCurrentReactContext() != null) {
             super.setRootFragmentInternal(fragment);
         }
+    }
+
+    protected void showSnapshot() {
+        Bitmap bitmap = Utils.createBitmapFromView(findViewById(android.R.id.content));
+        SnapshotFragment snapshotFragment = new SnapshotFragment();
+        snapshotFragment.setSnapshot(bitmap);
+        FragmentHelper.addFragmentToBackStack(getSupportFragmentManager(), android.R.id.content, snapshotFragment, PresentAnimation.None);
     }
 
     private void createMainComponent() {

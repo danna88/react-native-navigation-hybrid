@@ -1,6 +1,6 @@
 package com.navigationhybrid;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import me.listenzz.navigation.DrawerFragment;
 
